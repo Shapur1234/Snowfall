@@ -6,10 +6,10 @@ FreezePhysics       = False
 ScreenWidth         = 640
 ScreenHeight        = 360
 PhysicsTimescale    = 10
-MaxNumOfProjectiles = 3
+MaxNumOfProjectiles = 5
 
-SnowflakesMinAmount = 100
-SnowflakesMaxAmount = 120
+SnowflakesMinAmount = 80
+SnowflakesMaxAmount = 100
 SantaWidth          = 12
 SantaHeight         = 24
 
