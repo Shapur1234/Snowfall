@@ -74,8 +74,8 @@ class FlakeCollection:
 
 class Projectile:
     def __init__(self, pos) -> None:
-        self.Pos = pos.Clone()
         self.Size = Vector2D(5, 10)
+        self.Pos = Vector2D(pos.X - self.Size.X // 2, pos.Y)
         self.Color = (0, 255, 0)
         self.Valid = True
         self.Speed = 1

@@ -8,8 +8,8 @@ ScreenHeight        = 360
 PhysicsTimescale    = 10
 MaxNumOfProjectiles = 3
 
-SnowflakesMinAmount = 40
-SnowflakesMaxAmount = 50
+SnowflakesMinAmount = 100
+SnowflakesMaxAmount = 120
 SantaWidth          = 12
 SantaHeight         = 24
 
