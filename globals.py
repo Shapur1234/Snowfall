@@ -6,7 +6,7 @@ FreezePhysics       = False
 ScreenWidth         = 640
 ScreenHeight        = 360
 PhysicsTimescale    = 10
-MaxNumOfProjectiles = 5
+MaxNumOfProjectiles = 50
 
 SnowflakesMinAmount = 80
 SnowflakesMaxAmount = 100

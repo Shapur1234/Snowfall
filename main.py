@@ -66,7 +66,10 @@ def Play(surface) -> None:
                     if event.key == pygame.K_SPACE:
                         if len(projectiles.List) < globals.MaxNumOfProjectiles:
                             projectiles.Add(santa.Pos)
-                            pygame.mixer.Channel(0).play(pygame.mixer.Sound("Sound/Blast.mp3"))
+                            try:
+                                pygame.mixer.Channel(len(projectiles.List)).play(pygame.mixer.Sound("Sound/Blast.mp3"))
+                            except IndexError:
+                                pygame.mixer.Channel(0).play(pygame.mixer.Sound("Sound/Blast.mp3"))
             
             if GameState == 1:
                 if not globals.FreezePhysics and event.type == pygame.USEREVENT + 1:
@@ -111,12 +114,9 @@ def DetectLaserCollision(projectileArray, snowArray) -> tuple:
         if temp:
             collidedFlakes += temp
             collidedProjectiles += [i]
-
-    snowArray.List = list(map(lambda x: gameobjects.Flake() if snowArray.List.index(x) in collidedFlakes else x, snowArray.List))
-    projectileArray.List = list(filter(lambda x: not projectileArray.List.index(x) in collidedProjectiles, projectileArray.List))
     
-    return projectileArray.List, snowArray.List
-
+    return list(filter(lambda x: not projectileArray.List.index(x) in collidedProjectiles, projectileArray.List)), list(map(lambda x: gameobjects.Flake() if snowArray.List.index(x) in collidedFlakes else x, snowArray.List))
+    
 def ResetGlobals() -> None:
     globals.Disco               = False
     globals.DisplayColliders    = False

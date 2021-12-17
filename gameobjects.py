@@ -2,6 +2,7 @@ import globals
 
 import pygame
 import random
+import time
 
 class Vector2D:
     def __init__(self, x, y) -> None:
@@ -104,6 +105,18 @@ class Projectile:
     def Move(self):
         self.Pos.Y -= 1.5
         self.ClampCoordinates()
+
+class Explosion:
+    def __init__(self, pos) -> None:
+        self.Size = Vector2D(40, 40)
+        self.Pos = Vector2D(pos.X - self.Size.X // 2, pos.Y - self.Size.X // 2)
+        self.Time = time.time
+        self.Valid = True
+
+    def Draw(self, surface) -> None:
+        if self.Valid:
+            pass
+
 
 class ProjectileCollection:
     def __init__(self) -> None:
