@@ -87,7 +87,7 @@ def Play(surface) -> None:
 
                 GameState = 2 if globals.DetectCollisions and santa.GetRect().collidelist(snowFlakes.GetRects()) > 0 else GameState
 
-                projectiles.List, snowFlakes.List = DetectLaserCollision(projectiles.List, snowFlakes)
+                projectiles.List, snowFlakes.List = DetectLaserCollision(projectiles, snowFlakes)
 
         elif GameState == 2:
             pygame.mixer.music.load("end_screen.mp3")
@@ -101,16 +101,16 @@ def Play(surface) -> None:
 def DetectLaserCollision(projectileArray, snowArray) -> tuple:
     collidedFlakes, collidedProjectiles = [], []
 
-    for i in range(len(projectileArray)):
-        temp = projectileArray[i].GetRect().collidelistall(snowArray.GetRects())
+    for i in range(len(projectileArray.List)):
+        temp = projectileArray.List[i].GetRect().collidelistall(snowArray.GetRects())
         if temp:
             collidedFlakes += temp
             collidedProjectiles += [i]
 
     snowArray.List = list(map(lambda x: gameobjects.Flake() if snowArray.List.index(x) in collidedFlakes else x, snowArray.List))
-    projectileArray = list(filter(lambda x: not projectileArray.index(x) in collidedProjectiles, projectileArray))
+    projectileArray.List = list(filter(lambda x: not projectileArray.List.index(x) in collidedProjectiles, projectileArray.List))
     
-    return projectileArray, snowArray.List
+    return projectileArray.List, snowArray.List
 
 def ResetGlobals() -> None:
     globals.Disco               = False
@@ -121,7 +121,7 @@ def ResetGlobals() -> None:
 def DrawTimer(surface, font, timeElapsed, color) -> None:
     surface.blit(font.render(f"{(time.time() - timeElapsed):.1f} s", True, color), (16, 16))
 
-def DrawEndScreenGraphics(surface, fonts, timeElapsed):
+def DrawEndScreenGraphics(surface, fonts, timeElapsed) -> None:
     surface.blit(pygame.image.load("end_screen.jpeg"), (0, 0, globals.ScreenWidth, globals.ScreenHeight))
     
     DrawTimer(surface, fonts[0], timeElapsed, globals.ColorBackground)
