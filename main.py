@@ -139,11 +139,6 @@ def DrawEndScreenGraphics(surface, fonts, timeElapsed) -> None:
 
 def PosChangeFromInput() -> int:
     pressedKeys = pygame.key.get_pressed()
-    if pressedKeys[pygame.K_RIGHT]:
-        return 1
-    elif pressedKeys[pygame.K_LEFT]:
-        return -1
-    
-    return 0
+    return 0 if pressedKeys[pygame.K_RIGHT] and pressedKeys[pygame.K_LEFT] else 1 if pressedKeys[pygame.K_RIGHT] else -1 if pressedKeys[pygame.K_LEFT] else 0
 
 main()
